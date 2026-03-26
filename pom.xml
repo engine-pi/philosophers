@@ -10,7 +10,7 @@
 
     <name>philosophers</name>
     <url>https://github.com/engine-pi/philosophers</url>
-    <description>Übung nach dem Cornelsen-Buch zum Dining-Philosophers-Problem</description>
+    <description>Dining philosophers problem - Speisende-Philosophen-Problem</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

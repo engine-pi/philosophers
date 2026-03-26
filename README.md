@@ -1,3 +1,1 @@
-# philosophers
-
-Übung nach dem Cornelsen-Buch zum Erzeuger-Verbraucher-Problem
+# Dining philosophers problem - Speisende-Philosophen-Problem
