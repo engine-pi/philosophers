@@ -1,5 +1,6 @@
 package philosophers;
 
+import pi.Controller;
 import pi.actor.Line;
 
 /**
@@ -73,27 +74,6 @@ class Fork
      */
     synchronized boolean tryPickUp(String color)
     {
-        int i = 0;
-        while (i < 100)
-        {
-            if (!used)
-            {
-                used = true;
-                line.color(color);
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    wait(10);
-                }
-                catch (InterruptedException e)
-                {
-                }
-                i++;
-            }
-        }
         return false;
     }
 
@@ -116,5 +96,11 @@ class Fork
     int id()
     {
         return id;
+    }
+
+    public static void main(String[] args)
+    {
+        Controller.instantMode(false);
+        Controller.start(new DiningPhilosophers());
     }
 }

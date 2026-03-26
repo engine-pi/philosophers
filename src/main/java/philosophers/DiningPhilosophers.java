@@ -1,7 +1,5 @@
 package philosophers;
 
-import java.util.ArrayList;
-
 import pi.Controller;
 import pi.Scene;
 import pi.actor.Circle;
@@ -9,7 +7,7 @@ import pi.actor.Line;
 import pi.graphics.geom.Vector;
 
 /**
- * Visualisierung des Problems der speisenden Philosophen
+ * Visualisierung des Problems der speisenden Philosophen.
  *
  * @author Johannes Neumeyer
  * @author Josef Friedrich
@@ -19,24 +17,24 @@ import pi.graphics.geom.Vector;
 class DiningPhilosophers extends Scene
 {
     /**
-     * verwaltet alle Gabeln
+     * Verwaltet alle Gabeln.
      */
-    private ArrayList<Fork> forks;
+    private Fork[] forks;
 
     /**
-     * verwaltet alle Teller
+     * Verwaltet alle Teller.
      */
-    private ArrayList<Circle> plates;
+    private Circle[] plates;
 
     /**
-     * verwaltet alle Tellerfarben
+     * Verwaltet alle Tellerfarben.
      */
-    private ArrayList<String> plateColors;
+    private String[] plateColors;
 
     /**
-     * verwaltet alle Philosophen
+     * Verwaltet alle Philosophen.
      */
-    private ArrayList<Philosopher> philosophers;
+    private Philosopher[] philosophers;
 
     /**
      * Beteiligte Objekte (Philosophen, Teller, Gabeln, ...) werden passend
@@ -46,39 +44,38 @@ class DiningPhilosophers extends Scene
     {
         info().description(
             "Abgelegte Gabeln sind schwarz, aufgenommene Gabeln haben die Farbe ihres aktuellen Besitzers.");
-        forks = new ArrayList<Fork>();
-        plates = new ArrayList<Circle>();
-        plateColors = new ArrayList<String>();
-        plateColors.add("rot");
-        plateColors.add("blau");
-        plateColors.add("grün");
-        plateColors.add("magenta");
-        plateColors.add("grau");
-        philosophers = new ArrayList<Philosopher>();
+        forks = new Fork[5];
+        plates = new Circle[5];
+        plateColors = new String[] { "rot", "blau", "grün", "magenta", "grau" };
+        philosophers = new Philosopher[5];
+
+        add(new Circle(13).center(0, 0).color("braun"));
+
+        backgroundColor("weiß");
 
         for (int i = 0; i < 5; i++)
         {
             // Gabeln
             Line line = new Line(Vector.ofAngle(36 + 72 * i).multiply(4),
-                    Vector.ofAngle(36 + 72 * i).multiply(6));
+                    Vector.ofAngle(36 + 72 * i).multiply(5));
             line.strokeWidth(0.5);
             add(line);
-            forks.add(new Fork(i, line));
+            forks[i] = new Fork(i, line);
 
             // Teller
             Circle circle = new Circle(2);
+            circle.color(plateColors[i])
+                .center(Vector.ofAngle(72 * i).multiply(5));
             add(circle);
-            circle.color(plateColors.get(i));
-            plates.add(new Circle());
-            circle.center(Vector.ofAngle(72 * i).multiply(5));
-            plates.add(circle);
+            plates[i] = circle;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            philosophers.add(new Philosopher(i, plateColors.get(i),
-                    forks.get((i - 1 + 5) % 5), forks.get(i)));
-            philosophers.get(i).start();
+            Philosopher philosopher = new Philosopher(i, plateColors[i],
+                    forks[(i - 1 + 5) % 5], forks[i]);
+            philosopher.start();
+            philosophers[i] = philosopher;
         }
     }
 

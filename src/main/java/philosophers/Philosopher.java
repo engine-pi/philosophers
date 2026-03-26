@@ -2,24 +2,27 @@ package philosophers;
 
 import java.util.Random;
 
+import pi.Controller;
+
 /**
- * Speisender Philosoph
+ * Ein speisender Philosoph.
  *
  * @author Johannes Neumeyer
  * @author Josef Friedrich
  *
  * @version 1.0
  */
+@SuppressWarnings("unused")
 class Philosopher extends Thread
 {
     /**
-     * Id des Philosophen
+     * Die ID des Philosophen.
      */
     private int id;
 
     /**
-     * Zeitangabe in ms als Grundlage für die Bestimmung zufälliger Ess- und
-     * Wartezeiten
+     * Die Zeitangabe in ms als Grundlage für die Bestimmung zufälliger Ess- und
+     * Wartezeiten.
      */
     private int waitingTime;
 
@@ -44,12 +47,12 @@ class Philosopher extends Thread
     private Random random;
 
     /**
-     * Konstruktor für Objekte der Klasse Philosoph
+     * Konstruktor für Objekte der Klasse Philosoph.
      *
-     * @param philosopherId Id des Philosophen
-     * @param plateColor Farbe des Tellers
-     * @param left die linke Gabel, die der Philosoph nutzt
-     * @param right die rechte Gabel, die der Philosoph nutzt
+     * @param philosopherId Die ID des Philosophen.
+     * @param plateColor Die Farbe des Tellers.
+     * @param left Die linke Gabel, die der Philosoph nutzt.
+     * @param right Die rechte Gabel, die der Philosoph nutzt.
      */
     Philosopher(int philosopherId, String plateColor, Fork left, Fork right)
     {
@@ -66,11 +69,11 @@ class Philosopher extends Thread
         return id;
     }
 
-    private void sleepRandomly(int milliseconds)
+    private void sleep()
     {
         try
         {
-            sleep(random.nextInt(milliseconds));
+            sleep(random.nextInt(waitingTime));
         }
         catch (InterruptedException e)
         {
@@ -82,15 +85,7 @@ class Philosopher extends Thread
      */
     public void fullfilCoffman()
     {
-        // denken
-        sleepRandomly(waitingTime);
-        leftFork.pickUp(plateColor);
-        rightFork.pickUp(plateColor);
-
-        // essen
-        sleepRandomly(waitingTime);
-        leftFork.putDown();
-        rightFork.putDown();
+        // Ergänzen
     }
 
     /**
@@ -98,42 +93,15 @@ class Philosopher extends Thread
      */
     public void violateCoffman4()
     {
-        // denken
-        sleepRandomly(waitingTime);
-        leftFork.pickUp(plateColor);
-        if (rightFork.id() > leftFork.id())
-        {
-            rightFork.pickUp(plateColor);
-        }
-        else
-        {
-            leftFork.putDown();
-            rightFork.putDown();
-            leftFork.putDown();
-        }
-
-        // essen
-        sleepRandomly(waitingTime);
-        leftFork.putDown();
-        rightFork.putDown();
+        // Ergänzen
     }
 
     /**
      * Verletze die Coffman-Bedingung 2 („Halten und Warten“)
      */
-    public void violateCoffmann2()
+    public void violateCoffman2()
     {
-        // denken
-        sleepRandomly(waitingTime);
-        leftFork.pickUp(plateColor);
-
-        if (rightFork.tryPickUp(plateColor))
-        {
-            // essen
-            sleepRandomly(waitingTime);
-            rightFork.putDown();
-        }
-        leftFork.putDown();
+        // Ergänzen
     }
 
     /**
@@ -148,7 +116,13 @@ class Philosopher extends Thread
         {
             fullfilCoffman();
             // violateCoffman4();
-            // violateCoffmann2();
+            // violateCoffman2();
         }
+    }
+
+    public static void main(String[] args)
+    {
+        Controller.instantMode(false);
+        Controller.start(new DiningPhilosophers());
     }
 }
