@@ -3,6 +3,8 @@ package philosophers;
 import pi.Controller;
 import pi.actor.Line;
 
+// Go to file:///data/school/repos/inf/java/engine-pi/docs/manual/projects/philosophers.md
+
 /**
  * Die Gabel zwischen zwei Philosophen.
  *
@@ -19,12 +21,7 @@ class Fork
     private boolean used;
 
     /**
-     * Die ID der Gabel.
-     */
-    private int id;
-
-    /**
-     * Doe Darstellung der Gabel als Linie.
+     * Die Darstellung der Gabel als Linie.
      */
     private Line line;
 
@@ -39,6 +36,23 @@ class Fork
         used = false;
         this.line = line;
         this.id = id;
+    }
+
+    /* id */
+
+    /**
+     * Die ID der Gabel.
+     */
+    private int id;
+
+    /**
+     * Liefert die ID der Gabel.
+     *
+     * @return Die ID der Gabel.
+     */
+    int id()
+    {
+        return id;
     }
 
     /**
@@ -58,6 +72,7 @@ class Fork
             }
             catch (InterruptedException e)
             {
+                Thread.currentThread().interrupt();
             }
         }
         used = true;
@@ -74,6 +89,14 @@ class Fork
      */
     synchronized boolean tryPickUp(String color)
     {
+        // Ergänzen
+
+        // ..............._
+        // ..___ ___ . __| | ___
+        // ./ __/ _ \ / _` |/ _ \
+        // | (_| (_) | (_| | .__/
+        // .\___\___/ \__,_|\___|
+
         return false;
     }
 
@@ -85,22 +108,12 @@ class Fork
     {
         used = false;
         line.color("schwarz");
-        notify();
-    }
-
-    /**
-     * Liefert die ID der Gabel.
-     *
-     * @return Die ID der Gabel.
-     */
-    int id()
-    {
-        return id;
+        notifyAll();
     }
 
     public static void main(String[] args)
     {
         Controller.instantMode(false);
-        Controller.start(new DiningPhilosophers());
+        Controller.start(new DiningPhilosophers(5), 800, 800);
     }
 }

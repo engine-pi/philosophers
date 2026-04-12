@@ -31,15 +31,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
+            <groupId>de.pirckheimer-gymnasium</groupId>
+            <artifactId>engine-pi</artifactId>
+            <version>0.46.0</version>
         </dependency>
 
         <dependency>
-            <groupId>de.pirckheimer-gymnasium</groupId>
-            <artifactId>engine-pi</artifactId>
-            <version>0.44.0</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- Optionally: parameterized tests support -->
