@@ -94,6 +94,12 @@ class DiningPhilosophers extends Scene implements FrameListener
         add(stopWatch);
 
         // Ergänzen: die ausgewählten Philosophen-Threads starten
+
+        // ..............._
+        // ..___ ___ . __| | ___
+        // ./ __/ _ \ / _` |/ _ \
+        // | (_| (_) | (_| | .__/
+        // .\___\___/ \__,_|\___|
     }
 
     private void createPhilosopher(String name, String color, int birth,
